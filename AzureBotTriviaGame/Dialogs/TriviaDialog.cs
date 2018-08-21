@@ -9,7 +9,7 @@ using Microsoft.Bot.Connector;
 namespace AzureBotTriviaGame.Dialogs
 {
     [Serializable]
-    public class PlayTriviaDialog : IDialog<object>
+    public class TriviaDialog : IDialog<object>
     {
         private TriviaGame _game = null;
 
@@ -60,6 +60,7 @@ namespace AzureBotTriviaGame.Dialogs
                 else
                 {
                     await context.PostAsync("That's it! :-)");
+                    context.Done("");
                     _game = null;
                 }
             }
@@ -73,7 +74,7 @@ namespace AzureBotTriviaGame.Dialogs
         private IMessageActivity MakeChoiceCard(IDialogContext context, TriviaQuestion question)
         {
             var activity = context.MakeMessage();
-            
+
             // make sure the attachments have been initialized, we use the attachments to add buttons to the activity message
             if (activity.Attachments == null)
             {
